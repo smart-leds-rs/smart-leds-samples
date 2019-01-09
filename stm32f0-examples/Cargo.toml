@@ -1,5 +1,5 @@
 [package]
-name = "stm32f0"
+name = "stm32f0-examples"
 version = "0.1.0"
 authors = ["David Sawatzke <david-sawatzke@users.noreply.github.com>"]
 edition = "2018"

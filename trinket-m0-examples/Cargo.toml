@@ -1,0 +1,14 @@
+[package]
+name = "trinket-m0-examples"
+version = "0.1.0"
+authors = ["David Sawatzke <david-sawatzke@users.noreply.github.com>"]
+edition = "2018"
+
+[dev-dependencies]
+atsamd21-hal = "0.2"
+trinket_m0 = { git = "https://github.com/atsamd-rs/atsamd"}
+cortex-m-rt = "0.5"
+cortex-m = "0.5"
+panic-halt = "0.2"
+smart-leds = {git = "https://github.com/smart-leds-rs/smart-leds"}
+ws2812-nop-samd21 = {git = "https://github.com/smart-leds-rs/ws2812-nop-samd21" }

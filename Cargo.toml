@@ -1,7 +1,8 @@
 [workspace]
 
 members = [
-    "stm32f0"
+    "stm32f0-examples",
+    "trinket-m0-examples"
 ]
 
 

@@ -1,0 +1,14 @@
+[workspace]
+
+members = [
+    "stm32f0"
+]
+
+
+[profile.dev]
+debug = true
+
+[profile.release]
+debug = true
+lto = true
+opt-level = "s"

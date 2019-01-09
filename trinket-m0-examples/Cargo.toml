@@ -12,3 +12,4 @@ cortex-m = "0.5"
 panic-halt = "0.2"
 smart-leds = {git = "https://github.com/smart-leds-rs/smart-leds"}
 ws2812-nop-samd21 = {git = "https://github.com/smart-leds-rs/ws2812-nop-samd21" }
+ws2812-spi = {git = "https://github.com/smart-leds-rs/ws2812-spi-rs"}

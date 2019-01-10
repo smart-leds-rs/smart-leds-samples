@@ -1,0 +1,18 @@
+[package]
+name = "cpx-examples"
+version = "0.1.0"
+authors = ["Paul Sajna <sajattack@gmail.com>"]
+edition = "2018"
+
+[dev-dependencies]
+atsamd21-hal = { git = "https://github.com/atsamd-rs/atsamd" }
+circuit_playground_express = { git = "https://github.com/atsamd-rs/atsamd"}
+cortex-m-rt = "0.6"
+cortex-m = "0.5"
+embedded-hal = "0.2"
+panic-halt = "0.2"
+smart-leds = {git = "https://github.com/smart-leds-rs/smart-leds"}
+smart-leds-trait = {git = "https://github.com/smart-leds-rs/smart-leds-trait"}
+ws2812-nop-samd21 = {git = "https://github.com/smart-leds-rs/ws2812-nop-samd21"}
+ws2812-spi = {git = "https://github.com/smart-leds-rs/ws2812-spi-rs"}
+ws2812-timer-delay = {git = "https://github.com/smart-leds-rs/ws2812-timer-delay-rs"}

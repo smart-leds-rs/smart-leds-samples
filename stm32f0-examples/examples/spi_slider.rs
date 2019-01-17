@@ -21,21 +21,22 @@ use cortex_m_rt::entry;
 #[entry]
 fn main() -> ! {
     if let (Some(p), Some(cp)) = (stm32::Peripherals::take(), Peripherals::take()) {
-        let gpioa = p.GPIOA.split();
-
         // Constrain clocking registers
-        let rcc = p.RCC.constrain();
-
-        // Configure clock to 8 MHz (i.e. the default) and freeze it
-        let clocks = rcc.cfgr.sysclk(48.mhz()).freeze();
+        let mut flash = p.FLASH;
+        let mut rcc = p.RCC.configure().sysclk(48.mhz()).freeze(&mut flash);
+        let gpioa = p.GPIOA.split(&mut rcc);
 
         // Get delay provider
-        let mut delay = Delay::new(cp.SYST, clocks);
+        let mut delay = Delay::new(cp.SYST, &mut rcc);
 
         // Configure pins for SPI
-        let sck = gpioa.pa5.into_alternate_af0();
-        let miso = gpioa.pa6.into_alternate_af0();
-        let mosi = gpioa.pa7.into_alternate_af0();
+        let (sck, miso, mosi) = cortex_m::interrupt::free(move |cs| {
+            (
+                gpioa.pa5.into_alternate_af0(cs),
+                gpioa.pa6.into_alternate_af0(cs),
+                gpioa.pa7.into_alternate_af0(cs),
+            )
+        });
 
         // Configure SPI with 3Mhz rate
         let spi = Spi::spi1(
@@ -43,7 +44,7 @@ fn main() -> ! {
             (sck, miso, mosi),
             ws2812::MODE,
             3_000_000.hz(),
-            clocks,
+            &mut rcc,
         );
         const MAX: usize = 8;
         const COLOR1: Color = Color {

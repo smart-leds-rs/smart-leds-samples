@@ -22,20 +22,19 @@ use cortex_m_rt::entry;
 #[entry]
 fn main() -> ! {
     if let (Some(p), Some(cp)) = (stm32::Peripherals::take(), Peripherals::take()) {
-        let gpioa = p.GPIOA.split();
+        // Constrain clocking registers
+        let mut flash = p.FLASH;
+        let mut rcc = p.RCC.configure().sysclk(48.mhz()).freeze(&mut flash);
+        let gpioa = p.GPIOA.split(&mut rcc);
 
         /* (Re-)configure PA7 as output */
-        let mut ws_data_pin = gpioa.pa7.into_push_pull_output_hs();
+        let mut ws_data_pin =
+            cortex_m::interrupt::free(move |cs| gpioa.pa7.into_push_pull_output_hs(cs));
 
-        // Constrain clocking registers
-        let rcc = p.RCC.constrain();
-
-        let clocks = rcc.cfgr.sysclk(48.mhz()).freeze();
-
-        let timer = Timer::tim1(p.TIM1, MegaHertz(3), clocks);
+        let timer = Timer::tim1(p.TIM1, MegaHertz(3), &mut rcc);
 
         // Get delay provider
-        let mut delay = Delay::new(cp.SYST, clocks);
+        let mut delay = Delay::new(cp.SYST, &mut rcc);
 
         let mut ws = Ws2812::new(timer, &mut ws_data_pin);
         let mut data: [Color; 3] = [Color::default(); 3];

@@ -17,8 +17,7 @@ use crate::ws2812::Ws2812;
 use smart_leds::SmartLedsWrite;
 use smart_leds::{brightness, Color};
 
-entry!(main);
-
+#[entry]
 fn main() -> ! {
     let mut peripherals = Peripherals::take().unwrap();
     let core = CorePeripherals::take().unwrap();

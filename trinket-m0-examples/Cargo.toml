@@ -7,9 +7,9 @@ edition = "2018"
 [dev-dependencies]
 atsamd21-hal = "0.2"
 trinket_m0 = { git = "https://github.com/atsamd-rs/atsamd"}
-cortex-m-rt = "0.5"
-cortex-m = "0.5"
+cortex-m-rt = "0.6"
+cortex-m = "0.5.8"
 panic-halt = "0.2"
 smart-leds = {git = "https://github.com/smart-leds-rs/smart-leds"}
 ws2812-nop-samd21 = {git = "https://github.com/smart-leds-rs/ws2812-nop-samd21" }
-ws2812-spi = {git = "https://github.com/smart-leds-rs/ws2812-spi-rs"}
+ws2812-spi = {git = "https://github.com/smart-leds-rs/ws2812-spi-rs", features = ["mosi_idle_high"]}

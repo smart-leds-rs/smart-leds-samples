@@ -1,8 +1,6 @@
 #![no_std]
 #![no_main]
 
-use cortex_m_rt::entry;
-
 #[allow(unused)]
 use panic_halt;
 
@@ -18,8 +16,9 @@ use crate::ws2812::Ws2812;
 use smart_leds::Color;
 use smart_leds::SmartLedsWrite;
 
-entry!(main);
+use cortex_m_rt::entry;
 
+#[entry]
 fn main() -> ! {
     let mut peripherals = Peripherals::take().unwrap();
     let core = CorePeripherals::take().unwrap();

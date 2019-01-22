@@ -13,3 +13,4 @@ panic-halt = "0.2"
 smart-leds = {git = "https://github.com/smart-leds-rs/smart-leds"}
 ws2812-nop-samd21 = {git = "https://github.com/smart-leds-rs/ws2812-nop-samd21" }
 ws2812-spi = {git = "https://github.com/smart-leds-rs/ws2812-spi-rs", features = ["mosi_idle_high"]}
+apa102-spi = {git = "https://github.com/smart-leds-rs/apa102-spi-rs"}

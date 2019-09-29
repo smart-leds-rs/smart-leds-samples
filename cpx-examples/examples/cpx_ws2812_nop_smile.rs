@@ -10,8 +10,8 @@ use hal::clock::GenericClockController;
 use hal::Peripherals;
 
 use smart_leds::colors::YELLOW;
-use smart_leds_trait::Color;
-use smart_leds_trait::SmartLedsWrite;
+use smart_leds_trait::RGB8;
+use smart_leds::SmartLedsWrite;
 use ws2812::Ws2812;
 
 use cortex_m_rt::entry;
@@ -31,7 +31,7 @@ fn main() -> ! {
     let neopixel_pin = pins.neopixel.into_push_pull_output(&mut pins.port);
     let mut neopixel = Ws2812::new(neopixel_pin);
 
-    let off = Color::default();
+    let off = RGB8::default();
     let smile = [
         YELLOW, off, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, YELLOW, off, YELLOW,
     ];

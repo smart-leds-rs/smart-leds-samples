@@ -13,8 +13,8 @@ use crate::hal::delay::Delay;
 use embedded_hal::blocking::delay::DelayMs;
 use cortex_m_rt::entry;
 
-use smart_leds_trait::SmartLedsWrite;
-use smart_leds_trait::Color;
+use smart_leds::SmartLedsWrite;
+use smart_leds_trait::RGB8;
 use smart_leds::colors::ORANGE;
 use smart_leds::gamma;
 use smart_leds::brightness;
@@ -36,7 +36,7 @@ fn main() -> ! {
 
     let mut delay = Delay::new(core.SYST, &mut clocks);
     const NUM_LEDS: usize = 10;
-    let mut data = [Color::default(); NUM_LEDS];
+    let mut data = [RGB8::default(); NUM_LEDS];
 
     loop {
         for i in 0..NUM_LEDS {

@@ -16,8 +16,8 @@ use crate::ws2812::prerendered::Timing;
 use embedded_hal::blocking::delay::DelayMs;
 use cortex_m_rt::entry;
 
-use smart_leds_trait::SmartLedsWrite;
-use smart_leds_trait::Color;
+use smart_leds::SmartLedsWrite;
+use smart_leds_trait::RGB8;
 use smart_leds::brightness;
 
 #[entry]
@@ -53,7 +53,7 @@ fn main() -> ! {
 
     let mut delay = Delay::new(core.SYST, &mut clocks);
     const NUM_LEDS: usize = 10;
-    let mut data = [Color::default().into(); NUM_LEDS];
+    let mut data = [RGB8::default().into(); NUM_LEDS];
     let mut rendered_data = [0; NUM_LEDS * 3 * 5];
 
     let mut neopixel = ws2812::prerendered::Ws2812::new(spi, Timing::new(2_000_000).unwrap(), &mut rendered_data);
@@ -71,7 +71,7 @@ fn main() -> ! {
 
 /// Input a value 0 to 255 to get a color value
 /// The colours are a transition r - g - b - back to r.
-fn wheel(mut wheel_pos: u8) -> Color {
+fn wheel(mut wheel_pos: u8) -> RGB8 {
     wheel_pos = 255 - wheel_pos;
     if wheel_pos < 85 {
         return (255 - wheel_pos * 3, 0, wheel_pos * 3).into()

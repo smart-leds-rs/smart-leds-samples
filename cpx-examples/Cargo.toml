@@ -5,9 +5,9 @@ authors = ["Paul Sajna <sajattack@gmail.com>"]
 edition = "2018"
 
 [dev-dependencies]
-circuit_playground_express = "0.5"
+circuit_playground_express = "0.3"
 cortex-m-rt = "0.6"
-cortex-m = "0.5"
+cortex-m = "0.5.8"
 embedded-hal = "0.2"
 panic-halt = "0.2"
 smart-leds = {git = "https://github.com/smart-leds-rs/smart-leds"}

@@ -19,8 +19,8 @@ use embedded_hal::timer::CountDown;
 use embedded_hal::blocking::delay::DelayMs;
 use cortex_m_rt::entry;
 
-use smart_leds_trait::SmartLedsWrite;
-use smart_leds_trait::Color;
+use crate::smart_leds::SmartLedsWrite;
+use smart_leds_trait::RGB8;
 use smart_leds::brightness;
 
 #[entry]
@@ -44,7 +44,7 @@ fn main() -> ! {
 
     let mut delay = Delay::new(core.SYST, &mut clocks);
     const NUM_LEDS: usize = 10;
-    let mut data = [Color::default(); NUM_LEDS];
+    let mut data = [RGB8::default(); NUM_LEDS];
 
     loop {
         for j in 0..(256*5) {
@@ -59,7 +59,7 @@ fn main() -> ! {
 
 /// Input a value 0 to 255 to get a color value
 /// The colours are a transition r - g - b - back to r.
-fn wheel(mut wheel_pos: u8) -> Color {
+fn wheel(mut wheel_pos: u8) -> RGB8 {
     wheel_pos = 255 - wheel_pos;
     if wheel_pos < 85 {
         return (255 - wheel_pos * 3, 0, wheel_pos * 3).into()

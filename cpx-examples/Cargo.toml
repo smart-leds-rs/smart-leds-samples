@@ -5,8 +5,7 @@ authors = ["Paul Sajna <sajattack@gmail.com>"]
 edition = "2018"
 
 [dev-dependencies]
-atsamd21-hal = { git = "https://github.com/atsamd-rs/atsamd" }
-circuit_playground_express = { git = "https://github.com/atsamd-rs/atsamd"}
+circuit_playground_express = "0.5"
 cortex-m-rt = "0.6"
 cortex-m = "0.5"
 embedded-hal = "0.2"

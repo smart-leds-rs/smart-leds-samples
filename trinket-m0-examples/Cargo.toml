@@ -5,12 +5,21 @@ authors = ["David Sawatzke <david-sawatzke@users.noreply.github.com>"]
 edition = "2018"
 
 [dev-dependencies]
-atsamd21-hal = "0.2"
-trinket_m0 = { git = "https://github.com/atsamd-rs/atsamd"}
+trinket_m0 = { git = "https://github.com/atsamd-rs/atsamd", features = ["unproven"]}
+embedded-hal = "0.2.3"
+bitbang-hal = "0.3"
 cortex-m-rt = "0.6"
-cortex-m = "0.5.8"
+cortex-m = "0.6"
 panic-halt = "0.2"
-smart-leds = {git = "https://github.com/smart-leds-rs/smart-leds"}
-ws2812-nop-samd21 = {git = "https://github.com/smart-leds-rs/ws2812-nop-samd21" }
-ws2812-spi = {git = "https://github.com/smart-leds-rs/ws2812-spi-rs", features = ["mosi_idle_high"]}
-apa102-spi = {git = "https://github.com/smart-leds-rs/apa102-spi-rs"}
+smart-leds = "0.3"
+smart-leds-trait = "0.2"
+apa102-spi = "0.3"
+
+
+[profile.dev]
+debug = true
+
+[profile.release]
+debug = true
+lto = true
+opt-level = "s"

@@ -14,7 +14,7 @@ use crate::hal::spi::Spi;
 use crate::hal::stm32;
 use cortex_m::peripheral::Peripherals;
 
-use smart_leds::{Color, SmartLedsWrite};
+use smart_leds::{RGB8, SmartLedsWrite};
 
 use cortex_m_rt::entry;
 
@@ -47,12 +47,12 @@ fn main() -> ! {
             &mut rcc,
         );
         const MAX: usize = 8;
-        const COLOR1: Color = Color {
+        const COLOR1: RGB8 = RGB8 {
             r: 0x00,
             g: 0xc3,
             b: 0x36,
         };
-        const COLOR2: Color = Color {
+        const COLOR2: RGB8 = RGB8 {
             r: 0x00,
             g: 0x24,
             b: 0xb0,

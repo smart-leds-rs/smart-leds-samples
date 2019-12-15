@@ -15,7 +15,7 @@ use crate::hal::timers::*;
 use crate::ws2812::Ws2812;
 use cortex_m::peripheral::Peripherals;
 
-use smart_leds::{Color, SmartLedsWrite};
+use smart_leds::{RGB8, SmartLedsWrite};
 
 use cortex_m_rt::entry;
 
@@ -37,20 +37,20 @@ fn main() -> ! {
         let mut delay = Delay::new(cp.SYST, &mut rcc);
 
         let mut ws = Ws2812::new(timer, &mut ws_data_pin);
-        let mut data: [Color; 3] = [Color::default(); 3];
-        let empty: [Color; 3] = [Color::default(); 3];
+        let mut data: [RGB8; 3] = [RGB8::default(); 3];
+        let empty: [RGB8; 3] = [RGB8::default(); 3];
 
-        data[0] = Color {
+        data[0] = RGB8 {
             r: 0,
             g: 0,
             b: 0x10,
         };
-        data[1] = Color {
+        data[1] = RGB8 {
             r: 0,
             g: 0x10,
             b: 0,
         };
-        data[2] = Color {
+        data[2] = RGB8 {
             r: 0x10,
             g: 0,
             b: 0,

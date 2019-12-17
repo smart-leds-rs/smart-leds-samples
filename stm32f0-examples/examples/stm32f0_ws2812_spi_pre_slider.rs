@@ -14,7 +14,7 @@ use crate::hal::stm32;
 use crate::ws2812::prerendered::{Timing, Ws2812};
 use cortex_m::peripheral::Peripherals;
 
-use smart_leds::{Color, SmartLedsWrite};
+use smart_leds::{SmartLedsWrite, RGB8};
 
 use cortex_m_rt::entry;
 
@@ -49,17 +49,17 @@ fn main() -> ! {
             &mut rcc,
         );
         const MAX: usize = 8;
-        const COLOR1: Color = Color {
+        const COLOR1: RGB8 = RGB8 {
             r: 0x00,
             g: 0xc3 / 5,
             b: 0x36 / 5,
         };
-        const COLOR2: Color = Color {
+        const COLOR2: RGB8 = RGB8 {
             r: 0x00,
             g: 0x24 / 5,
             b: 0xb0 / 5,
         };
-        let mut data = [(0, 0, 0).into(); MAX];
+        let mut data: [RGB8; MAX] = [(0, 0, 0).into(); MAX];
         let mut main = 0;
         let mut render_data = [0; MAX * 3 * 5];
         let mut ws = Ws2812::new(spi, Timing::new(4000000).unwrap(), &mut render_data);

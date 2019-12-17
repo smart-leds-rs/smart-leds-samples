@@ -15,7 +15,7 @@ use crate::hal::timers::*;
 use crate::ws2812::Ws2812;
 use cortex_m::peripheral::Peripherals;
 
-use smart_leds::{brightness, RGB8, SmartLedsWrite};
+use smart_leds::{brightness, SmartLedsWrite, RGB8};
 
 use cortex_m_rt::entry;
 
@@ -28,7 +28,7 @@ fn main() -> ! {
         let gpioa = p.GPIOA.split(&mut rcc);
 
         /* (Re-)configure PA7 as output */
-        let mut ws_data_pin =
+        let ws_data_pin =
             cortex_m::interrupt::free(move |cs| gpioa.pa7.into_push_pull_output_hs(cs));
 
         let timer = Timer::tim1(p.TIM1, MegaHertz(3), &mut rcc);
@@ -36,7 +36,7 @@ fn main() -> ! {
         // Get delay provider
         let mut delay = Delay::new(cp.SYST, &mut rcc);
 
-        let mut ws = Ws2812::new(timer, &mut ws_data_pin);
+        let mut ws = Ws2812::new(timer, ws_data_pin);
 
         const NUM_LEDS: usize = 10;
         let mut data = [RGB8::default(); NUM_LEDS];

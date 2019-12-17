@@ -14,7 +14,7 @@ use crate::hal::spi::Spi;
 use crate::hal::stm32;
 use cortex_m::peripheral::Peripherals;
 
-use smart_leds::{RGB8, SmartLedsWrite};
+use smart_leds::{SmartLedsWrite, RGB8};
 
 use cortex_m_rt::entry;
 
@@ -57,7 +57,7 @@ fn main() -> ! {
             g: 0x24,
             b: 0xb0,
         };
-        let mut data = [(0, 0, 0).into(); MAX];
+        let mut data: [RGB8; MAX] = [(0, 0, 0).into(); MAX];
         let mut main = 0;
         let mut apa = Apa102::new(spi);
         let mut up = true;

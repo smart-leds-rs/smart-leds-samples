@@ -14,7 +14,7 @@ panic-halt = "0.2"
 smart-leds = "0.3"
 smart-leds-trait = "0.2"
 apa102-spi = "0.3"
-ws2812-spi = "0.3.0"
+ws2812-spi = {version = "0.3.0",  features = ["mosi_idle_high"]}
 
 
 [profile.dev]

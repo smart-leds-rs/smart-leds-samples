@@ -5,9 +5,9 @@ authors = ["David Sawatzke <david-sawatzke@users.noreply.github.com>"]
 edition = "2018"
 
 [dev-dependencies]
-trinket_m0 = { git = "https://github.com/atsamd-rs/atsamd", features = ["unproven"]}
+trinket_m0 = { version = "0.8.0", features = ["unproven"]}
 embedded-hal = "0.2.3"
-bitbang-hal = "0.3"
+bitbang-hal = "0.3.2"
 cortex-m-rt = "0.6"
 cortex-m = "0.6"
 panic-halt = "0.2"

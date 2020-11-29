@@ -17,3 +17,5 @@ apa102-spi = "0.3.2"
 
 [patch.crates-io]
 ws2812-spi = { git = "https://github.com/smart-leds-rs/ws2812-spi-rs", branch = "update_spi"}
+# Wait until stm32-rs/stm32f0xx-hal/122 is merged
+stm32f0xx-hal = {git = "https://github.com/dkm/stm32f0xx-hal"}

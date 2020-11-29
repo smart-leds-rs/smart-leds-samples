@@ -1,8 +1,8 @@
 #![no_main]
 #![no_std]
 
-#[allow(unused)]
-use panic_halt;
+use panic_rtt_target as _;
+use rtt_target::rtt_init_default;
 
 use stm32f0xx_hal as hal;
 use ws2812_spi as ws2812;
@@ -14,12 +14,14 @@ use crate::hal::stm32;
 use crate::ws2812::Ws2812;
 use cortex_m::peripheral::Peripherals;
 
-use smart_leds::{RGB8, SmartLedsWrite};
+use smart_leds::{SmartLedsWrite, RGB8};
 
 use cortex_m_rt::entry;
 
 #[entry]
 fn main() -> ! {
+    rtt_init_default!();
+
     if let (Some(p), Some(cp)) = (stm32::Peripherals::take(), Peripherals::take()) {
         // Constrain clocking registers
         let mut flash = p.FLASH;

@@ -1,0 +1,32 @@
+[package]
+name = "avr-examples"
+version = "0.1.0"
+authors = ["David Sawatzke <d-git@sawatzke.dev>"]
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+panic-halt = "0.2.0"
+smart-leds = "0.3.0"
+ws2812-spi = "0.3.0"
+
+[dependencies.arduino-leonardo]
+git = "https://github.com/Rahix/avr-hal"
+rev = "a22f9547100744b31053bab96c957270bd973cee"
+
+# Configure the build for minimal size
+[profile.dev]
+panic = "abort"
+lto = true
+opt-level = 3
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+debug = true
+lto = "fat"
+opt-level = 3
+
+[patch.crates-io]
+ws2812-spi = { git = "https://github.com/smart-leds-rs/ws2812-spi-rs", branch = "update_spi"}

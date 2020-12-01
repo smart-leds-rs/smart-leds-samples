@@ -29,4 +29,4 @@ lto = "fat"
 opt-level = 3
 
 [patch.crates-io]
-ws2812-spi = { git = "https://github.com/smart-leds-rs/ws2812-spi-rs", branch = "update_spi"}
+ws2812-spi = { git = "https://github.com/smart-leds-rs/ws2812-spi-rs", branch = "improve_prerendered"}

@@ -1,0 +1,5 @@
+[default.general]
+chip = "LPC845M301JHI48"
+
+[default.rtt]
+enabled = true

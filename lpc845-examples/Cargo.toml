@@ -7,7 +7,7 @@ edition = "2018"
 [dev-dependencies]
 panic-rtt-target = {version = "0.1.1", features = ["cortex-m"]}
 rtt-target = {version = "0.3", features = ["cortex-m"]}
-lpc8xx-hal = {version = "0.8.2", features = ["845-rt"]}
+lpc8xx-hal = {version = "0.9", features = ["845-rt"]}
 smart-leds = "0.3.0"
 ws2812-spi = "0.4.0"
 

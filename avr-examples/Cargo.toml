@@ -13,7 +13,7 @@ ws2812-spi = "0.4.0"
 
 [dependencies.arduino-leonardo]
 git = "https://github.com/Rahix/avr-hal"
-rev = "a22f9547100744b31053bab96c957270bd973cee"
+rev = "885e8ec6d6d2fe34f26a1e2697a99f41092f0985"
 
 # Configure the build for minimal size
 [profile.dev]

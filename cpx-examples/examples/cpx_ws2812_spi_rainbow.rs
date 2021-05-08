@@ -51,7 +51,6 @@ fn main() -> ! {
     let mut delay = Delay::new(core.SYST, &mut clocks);
     const NUM_LEDS: usize = 10;
     let mut data = [RGB8::default().into(); NUM_LEDS];
-    //let mut rendered_data = [0; NUM_LEDS * 3 * 5];
 
     let mut neopixel = ws2812::Ws2812::new(spi);
 

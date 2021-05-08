@@ -5,12 +5,12 @@ authors = ["Paul Sajna <sajattack@gmail.com>"]
 edition = "2018"
 
 [dev-dependencies]
-circuit_playground_express = "0.3"
+circuit_playground_express = "0.9"
+cortex-m = "0.6"
 cortex-m-rt = "0.6"
-cortex-m = "0.5.8"
 embedded-hal = "0.2"
 panic-halt = "0.2"
-smart-leds = {git = "https://github.com/smart-leds-rs/smart-leds"}
-smart-leds-trait = {git = "https://github.com/smart-leds-rs/smart-leds-trait"}
-ws2812-spi = {git = "https://github.com/smart-leds-rs/ws2812-spi-rs", features = ["mosi_idle_high"]}
-ws2812-timer-delay = {git = "https://github.com/smart-leds-rs/ws2812-timer-delay-rs"}
+smart-leds = "0.3" 
+smart-leds-trait = "0.2" 
+ws2812-spi = {version="0.4", features=["mosi_idle_high"]}
+ws2812-timer-delay = {version="0.3", features=["slow"]}

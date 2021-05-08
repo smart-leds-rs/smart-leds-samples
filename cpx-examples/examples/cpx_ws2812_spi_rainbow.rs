@@ -4,15 +4,14 @@
 #[allow(unused)]
 use panic_halt;
 
-use circuit_playground_express as hal;
+use circuit_playground_express as cpx;
 use ws2812_spi as ws2812;
 
-use crate::hal::clock::GenericClockController;
-use crate::hal::{Peripherals, CorePeripherals};
-use crate::hal::delay::Delay;
-use crate::hal::sercom::PadPin;
-use crate::hal::time::U32Ext;
-use crate::ws2812::prerendered::Timing;
+use cpx::clock::GenericClockController;
+use cpx::pac::{Peripherals, CorePeripherals};
+use cpx::delay::Delay;
+use cpx::time::U32Ext;
+use cpx::sercom::PadPin;
 use embedded_hal::blocking::delay::DelayMs;
 use cortex_m_rt::entry;
 
@@ -30,33 +29,30 @@ fn main() -> ! {
         &mut peripherals.SYSCTRL,
         &mut peripherals.NVMCTRL,
     );
-    let mut pins = hal::Pins::new(peripherals.PORT);
+    let mut pins = cpx::Pins::new(peripherals.PORT);
 
-    let spi_pinout = hal::sercom::SPI5Pinout::Dipo0Dopo2 {
-        miso: pins.sda.into_pad(&mut pins.port),
-        mosi: pins.neopixel.into_pad(&mut pins.port),
-        sck: pins.scl.into_pad(&mut pins.port) 
-    };
+    let miso = pins.sda.into_pad(&mut pins.port);
+    let mosi = pins.neopixel.into_pad(&mut pins.port);
+    let sck = pins.scl.into_pad(&mut pins.port);
 
     let gclk = clocks.gclk0();
-    let spi = hal::sercom::SPIMaster5::new(
+    let spi = cpx::sercom::SPIMaster5::new(
         &clocks.sercom5_core(&gclk).unwrap(),
-        2_000_000u32.hz(),
+        3000.khz(),
         embedded_hal::spi::Mode {
             polarity: embedded_hal::spi::Polarity::IdleLow,
             phase: embedded_hal::spi::Phase::CaptureOnFirstTransition,
         },
         peripherals.SERCOM5,
         &mut peripherals.PM,
-        spi_pinout,
+        (miso, mosi, sck),
     );
 
     let mut delay = Delay::new(core.SYST, &mut clocks);
     const NUM_LEDS: usize = 10;
     let mut data = [RGB8::default().into(); NUM_LEDS];
-    let mut rendered_data = [0; NUM_LEDS * 3 * 5];
 
-    let mut neopixel = ws2812::prerendered::Ws2812::new(spi, Timing::new(2_000_000).unwrap(), &mut rendered_data);
+    let mut neopixel = ws2812::Ws2812::new(spi);
 
     loop {
         for j in 0..(256*5) {

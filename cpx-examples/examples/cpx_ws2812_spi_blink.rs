@@ -17,7 +17,6 @@ use cortex_m_rt::entry;
 
 use smart_leds::SmartLedsWrite;
 use smart_leds_trait::RGB8;
-use smart_leds::brightness;
 
 #[entry]
 fn main() -> ! {
@@ -50,17 +49,6 @@ fn main() -> ! {
 
     let mut delay = Delay::new(core.SYST, &mut clocks);
 
-    const NUM_LEDS: usize = 10;
-    const COLOR1: RGB8 = RGB8 {
-        r: 0x00,
-        g: 0xc3 / 5,
-        b: 0x36 / 5,
-    };
-    const COLOR2: RGB8 = RGB8 {
-        r: 0x00,
-        g: 0x24 / 5,
-        b: 0xb0 / 5,
-    };
     let mut data: [RGB8; 10] = [RGB8::default(); 10];
     let empty: [RGB8; 10] = [RGB8::default(); 10];
     let mut ws = ws2812::Ws2812::new(spi);

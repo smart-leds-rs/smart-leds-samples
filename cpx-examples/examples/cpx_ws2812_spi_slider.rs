@@ -17,7 +17,6 @@ use cortex_m_rt::entry;
 
 use smart_leds::SmartLedsWrite;
 use smart_leds_trait::RGB8;
-use smart_leds::brightness;
 
 #[entry]
 fn main() -> ! {

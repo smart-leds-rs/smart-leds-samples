@@ -1,0 +1,27 @@
+[package]
+name = "microbit-v2-examples"
+version = "0.1.0"
+authors = ["Jordan Williams <jordan@jwillikers.com>"]
+edition = "2018"
+
+[dependencies]
+cortex-m-rt = "0.6.2"
+embedded-time = "0.12.0"
+microbit-v2 = "0.11.0"
+nb = "0.1"
+panic-rtt-target = {version = "0.1.1", features = ["cortex-m"]}
+rtt-target = {version = "0.3", features = ["cortex-m"]}
+smart-leds = "0.3.0"
+ws2812-spi = "0.4.0"
+
+[profile]
+[profile.dev]
+debug = true
+lto = true
+opt-level = 3
+
+[profile.release]
+codegen-units = 1
+debug = true
+lto = true
+opt-level = 3

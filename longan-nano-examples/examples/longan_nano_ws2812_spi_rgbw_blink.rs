@@ -17,7 +17,7 @@ use ws2812_spi::Ws2812;
 fn main() -> ! {
     rtt_init_default!();
 
-    const DELAY: Milliseconds<u32> = Milliseconds::<u32>(8);
+    const DELAY: Milliseconds<u32> = Milliseconds::<u32>(1_000);
     // This example uses an RGBW NeoPixel Stick with 8 RGBW NeoPixels.
     const NUM_LEDS: usize = 8;
     debug_assert_ne!(NUM_LEDS, 0);

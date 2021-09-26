@@ -29,7 +29,7 @@ const SYS_HZ: u32 = 125_000_000_u32;
 fn main() -> ! {
     info!("Program start");
 
-    const DELAY: Milliseconds<u32> = Milliseconds::<u32>(8);
+    const DELAY: Milliseconds<u32> = Milliseconds::<u32>(1_000);
     const NUM_LEDS: usize = 8;
     debug_assert_ne!(NUM_LEDS, 0);
 

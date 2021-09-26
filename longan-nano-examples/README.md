@@ -16,11 +16,11 @@ The [dfu-util](http://dfu-util.sourceforge.net/) tool can be used to flash the L
 
 Build the example first.
 
-    cargo build --example longan_nano_ws2812_spi_rgbw_blink
+    cargo build --release --example longan_nano_ws2812_spi_rgbw_blink
 
 Then convert it to a `.bin` binary.
 
-    riscv64-unknown-elf-objcopy -O binary target/riscv32imac-unknown-none-elf/debug/examples/longan_nano_ws2812_spi_rgbw_blink firmware.bin
+    riscv64-unknown-elf-objcopy -O binary target/riscv32imac-unknown-none-elf/release/examples/longan_nano_ws2812_spi_rgbw_blink firmware.bin
 
 Attach the Longan Nano's USB-C port to your computer.
 Put the Longan Nano in bootloader mode by holding the `BOOT0` button pressed while pressing and releasing the reset button.

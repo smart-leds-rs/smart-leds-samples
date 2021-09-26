@@ -25,7 +25,7 @@ Install the `elf2uf2-rs` crate.
 While holding the `BOOTSEL` button, attach the Raspberry Pi Pico to your computer using the micro USB port.
 Flash the board using Cargo's `run` subcommand.
 
-    cargo run --example raspberry_pi_pico_ws2812_spi_rgbw_blink
+    cargo run --release --example raspberry_pi_pico_ws2812_spi_rgbw_blink
 
 ### SWD
 
@@ -45,7 +45,7 @@ Change the runner in `.cargo/config.toml` to `probe-run-rp`.
 
 Now just run an example with `cargo run`.
 
-    cargo run --example raspberry_pi_pico_ws2812_spi_rgbw_blink
+    cargo run --release --example raspberry_pi_pico_ws2812_spi_rgbw_blink
 
 #### picoprobe
 

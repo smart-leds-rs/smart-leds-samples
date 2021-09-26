@@ -6,10 +6,6 @@ Install the Rust toolchain for the Raspberry Pi Pico.
 
     rustup target add thumbv6m-none-eabi
 
-Install `probe-run-rp`, required until support lands in upstream [probe-run](https://github.com/knurling-rs/probe-run).
-
-    cargo install --git https://github.com/rp-rs/probe-run --branch main
-
 Install [flip-link](https://github.com/knurling-rs/flip-link)
 
     cargo install flip-link
@@ -37,6 +33,10 @@ Opposite the micro USB port on the Raspberry Pi Pico are three pins for making a
 Support for the Raspberry Pi Pico is missing for many popular debug probe tools currently, so using a second Raspberry Pi Pico as the debug probe works best.
 Refer to the _picoprobe_ section below for instructions.
 This section describes the general instructions to use any debug probe.
+
+Install `probe-run-rp`, required until support lands in upstream [probe-run](https://github.com/knurling-rs/probe-run).
+
+    cargo install --git https://github.com/rp-rs/probe-run --branch main
 
 Change the runner in `.cargo/config.toml` to `probe-run-rp`.
 

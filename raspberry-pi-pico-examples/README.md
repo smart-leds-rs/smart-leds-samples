@@ -2,6 +2,16 @@
 
 These examples use the [rp-rs/rp-hal](https://github.com/rp-rs/rp-hal) BSP for the [Raspberry Pi Pico](https://www.raspberrypi.org/products/raspberry-pi-pico/).
 
+Grab the latest [GNU Arm Embedded Toolchain](https://developer.arm.com/tools-and-software/open-source-software/developer-tools/gnu-toolchain/gnu-rm/downloads).
+Packages exist for this toolchain in the Ubuntu and Fedora Linux repositories.
+On Fedora Linux, install the necessary packages as follows.
+
+    sudo dnf install arm-none-eabi-gcc-cs arm-none-eabi-newlib
+
+On Ubuntu, use the following command to install the GNU Arm Embedded toolchain.
+
+    sudo apt install gcc-arm-none-eabi libnewlib-arm-none-eabi
+
 Install the Rust toolchain for the Raspberry Pi Pico.
 
     rustup target add thumbv6m-none-eabi

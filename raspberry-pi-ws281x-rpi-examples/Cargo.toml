@@ -1,0 +1,9 @@
+[package]
+name = "raspberry-pi-ws281x-rpi-examples"
+version = "0.1.0"
+authors = ["Nathan Samson <nathan@nathansamson.be>"]
+edition = "2018"
+
+[dependencies]
+smart-leds = "0.3.0"
+ws281x-rpi = "0.0.1"

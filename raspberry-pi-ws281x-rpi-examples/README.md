@@ -1,7 +1,7 @@
 # Raspberry Pi Examples
 
 This is an example that can be used on multiple Raspberry Pi models.
-This uses the [ws281x-rpi driver](https://github.com/nathansamson/ws281x-rpi)
+This uses the [third-party ws281x-rpi driver](https://github.com/nathansamson/ws281x-rpi)
 which can be used within Raspbian OS which means the rust std library can be used.
 
 ## Program

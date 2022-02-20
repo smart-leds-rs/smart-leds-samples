@@ -49,7 +49,7 @@ If it is not working, please refer to [following page](https://docs.rust-embedde
 
 ### Project settings
 
-For project to work correctly with HAL and given microcontroller, you'll also need <b>[.cargo/config](https://github.com/blaz-r/STM32F411-rust-neopixel/tree/main/.cargo/config)</b> and <b>[memory.x](https://github.com/blaz-r/STM32F411-rust-neopixel/tree/main/memory.x)</b> files. These are already present in this project and set for this microcontroller, more details can found [here](https://github.com/blaz-r/STM32F411-rust-neopixel).
+For project to work correctly with HAL and given microcontroller, you'll also need <b>[.cargo/config](/stm32f411-examples/.cargo/config)</b> and <b>[memory.x](/stm32f411-examples/memory.x)</b> files. These are already present in this project and set for this microcontroller, more details can found [here](https://github.com/blaz-r/STM32F411-rust-neopixel).
 
 ### Building project
 

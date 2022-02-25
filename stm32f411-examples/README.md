@@ -9,12 +9,9 @@ Following is a quick-start guide in case you are unfamiliar with building and ru
 
 ## Important
 
-To get this to work, you'll need to cross-compile the code and compile it with --release tag then load it with help of OpenOCD and GDB.
+To get this to work, you'll need to cross-compile the code and compile it with --release tag. To flash and run the code, you can either use probe-run or GDB with openOCD. More about running the project below.
 
-### Toolchain
-
-Everything about installation and details about tools are explained in [The Embedded Rust Book, section Tooling and Installation
-](https://docs.rust-embedded.org/book/intro/tooling.html)
+## Toolchain
 
 This code needs to be cross-compiled to work on STM32 microcontroller, which is an Arm Cortex M4 with FPU core. More info about the chip itself can be found in [Reference manual PDF](https://www.st.com/resource/en/reference_manual/dm00119316-stm32f411xc-e-advanced-arm-based-32-bit-mcus-stmicroelectronics.pdf).
 
@@ -24,11 +21,32 @@ In order to cross-compile, you'll need to add target used for this microcontroll
 rustup target add thumbv7em-none-eabihf
 ```
 
-As stated in the book, I also installed cargo-binutils and cargo-generate. More details can be found [here](https://docs.rust-embedded.org/book/intro/install.html).
+As stated in The Embedded Rust Book, I also installed cargo-binutils and cargo-generate. More details can be found [here](https://docs.rust-embedded.org/book/intro/install.html).
+
+At this point you can either use probe-run or GDB with openOCD to flash the code to microcontroller. Following are the setup instructions for either option, you don't need both.
+
+#### probe-run
+
+Probe run enables you to run the code on microcontroller, as if it was normal rust code. More info about it can be found in [probe-run repo](https://github.com/knurling-rs/probe-run).
+
+To install, run following command:
+```
+cargo install probe-run
+```
+If that doesn't work, refer to repo linked above.
+You might also need a ST-LINK driver, at least on Windows if you don't already have one.
+
+Once you have probe-run installed you can run code as described in one of the sections bellow, config file already contains setting for probe-run and stm32f411CEU blackpill.
+
+#### GDB & OpenOCD
+
+Everything about installation and details about tools are explained in [The Embedded Rust Book, section Tooling and Installation
+](https://docs.rust-embedded.org/book/intro/tooling.html)
+
 On the same page you can also find OS-Specific instructions for installing following needed tools:
 - GDB for Arm programs
 - OpenOCD to work with ST-LINK
-- ST-LINK usb driver
+- ST-LINK usb driver if needed
 
 Once all of these are installed, you can verify installation is working with following command:
 ```
@@ -59,7 +77,15 @@ cargo build --release --example stm32f411_example_spi_rainbow
 ```
 --release flag here was needed in my case, without this flag, the project didn't work correctly.
 
-### Running project
+### Running project with probe-run
+
+To run project with probe-run, use the following instruction from inside project folder:
+```
+cargo run --release --example stm32f411_example_spi_rainbow
+```
+Probe runner, with help of config file, will take care of the rest. As with normal rust, using <i>run</i> will build the project, then flash and run it on microcontroller.
+
+### Running project with GDB & OpenOCD
 
 To load and run the project on microcontroller, you'll need OpenOCD and GDB for Arm, which you can install as described above.
 

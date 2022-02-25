@@ -11,11 +11,12 @@ use ws2812_spi as ws2812;
 
 use crate::hal::delay::Delay;
 use crate::hal::pac;
+use crate::hal::gpio::NoPin;
 use crate::hal::prelude::*;
 use crate::hal::spi::Spi;
 use crate::ws2812::Ws2812;
 
-use smart_leds::{brightness, SmartLedsWrite, RGB8};
+use smart_leds::{gamma, SmartLedsWrite, RGB8, hsv::Hsv, hsv::hsv2rgb};
 
 #[entry]
 fn main() -> ! {
@@ -37,10 +38,10 @@ fn main() -> ! {
         let mut led = gpioc.pc13.into_push_pull_output();
         led.set_low();
 
-        // Configure pins for SPI, PA7 is output going to data line of leds
+        // Configure pins for SPI
         let sck1 = gpioa.pa5.into_alternate();
-        let miso1 = gpioa.pa6.into_alternate();
-        let mosi1 = gpioa.pa7.into_alternate();
+        let miso1 = NoPin;                          // miso not needed
+        let mosi1 = gpioa.pa7.into_alternate();     // PA7 is output going to data line of leds
 
         // SPI1 with 3Mhz
         let spi = Spi::new(dp.SPI1, (sck1, miso1, mosi1), ws2812::MODE, 3_000_000.hz(), clocks);
@@ -51,31 +52,21 @@ fn main() -> ! {
         let mut data = [RGB8::default(); LED_NUM];
 
         loop {
-            for j in 0..(256 * 5) {
+            for j in 0..256 {
                 for i in 0..LED_NUM {
-                    data[i] = wheel((((i * 256) as u16 / LED_NUM as u16 + j as u16) & 255) as u8);
+                    // rainbow cycle using HSV, where hue goes through all colors in circle
+                    // value sets the brightness
+                    let hsv = Hsv{hue: ((i * 3 + j) % 256) as u8, sat: 255, val: 100};
+
+                    data[i] = hsv2rgb(hsv);
                 }
-                ws.write(brightness(data.iter().cloned(), 32)).unwrap();
-                delay.delay_ms(5u8);
+                // before writing, apply gamma correction for nicer rainbow
+                ws.write(gamma(data.iter().cloned())).unwrap();
+                delay.delay_ms(10u8);
             }
         }
     }
     loop {
         continue;
     }
-}
-
-/// Input a value 0 to 255 to get a color value
-/// The colours are a transition r - g - b - back to r.
-fn wheel(mut wheel_pos: u8) -> RGB8 {
-    wheel_pos = 255 - wheel_pos;
-    if wheel_pos < 85 {
-        return (255 - wheel_pos * 3, 0, wheel_pos * 3).into();
-    }
-    if wheel_pos < 170 {
-        wheel_pos -= 85;
-        return (0, wheel_pos * 3, 255 - wheel_pos * 3).into();
-    }
-    wheel_pos -= 170;
-    (wheel_pos * 3, 255 - wheel_pos * 3, 0).into()
 }

@@ -42,7 +42,7 @@ fn main() -> ! {
         miso: Some(miso),
         mosi: Some(mosi),
     };
-    let spi = spi::Spi::new(dp.SPI0, pins, spi::Frequency::M2, spi::MODE_0);
+    let spi = spi::Spi::new(dp.SPI0, pins, spi::Frequency::M4, spi::MODE_0);
 
     let mut ws = Ws2812::new(spi);
 
